@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kalkulator</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <noscript
@@ -13,7 +17,12 @@
     >
     <div class="calculator">
       <div class="calculator__main-part-container">
-        <div class="calculator__display" id="js-display"></div>
+        <div class="calculator__history-button">
+          <span class="material-icons" id="calculator__history-button"
+            >history</span
+          >
+        </div>
+        <div class="calculator__display" id="js-display">0</div>
         <div class="calculator__memory-container">
           <div class="calculator__memory-button" id="js-MC">MC</div>
           <div class="calculator__memory-button" id="js-MR">MR</div>
@@ -99,7 +108,7 @@
         </div>
       </div>
       <div class="calculator__history-container">
-        <p class="calculator__history-title"></p>
+        <p class="calculator__history-title">Historia</p>
         <div class="calculator__history-list"></div>
       </div>
     </div>
