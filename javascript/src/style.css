@@ -1,0 +1,118 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  user-select: none;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  background-color: #ccc;
+}
+
+.calculator__main-part-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.calculator__history-container {
+  display: none;
+  width: 300px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.calculator__display {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  padding: 4px 8px;
+  font-size: 30px;
+}
+
+@media (min-width: 768px) {
+  .calculator__display {
+    font-size: 40px;
+  }
+}
+
+.calculator__memory-container {
+  display: flex;
+  width: 100%;
+  padding: 4px 10px;
+}
+
+.calculator__memory-button {
+  flex-grow: 1;
+  flex-basis: 30px;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  margin-bottom: 2px;
+  margin-left: 20px;
+}
+
+.calculator__buttons-container {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.calculator__memory-button:active,
+.calculator__button:hover:active {
+  background-color: #bbb;
+}
+
+.calculator__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(25% - 4px);
+  margin-bottom: 4px;
+  background-color: #ddd;
+}
+
+.calculator__button--is-lighter {
+  background-color: #eee;
+}
+.calculator__history-button {
+  display: none;
+}
+
+@media (min-width: 1025px) {
+  .calculator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vh;
+    height: 70vh;
+    border: solid 2px black;
+  }
+
+  .calculator__memory-button:hover,
+  .calculator__button:hover {
+    background-color: #bbb;
+    cursor: pointer;
+  }
+
+  .calculator__history-button {
+    display: block;
+    text-align: right;
+  }
+  #calculator__history-button {
+    font-size: 36px;
+    padding-right: 4px;
+    padding-top: 4px;
+    cursor: pointer;
+  }
+}
