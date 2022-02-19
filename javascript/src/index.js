@@ -10,7 +10,9 @@ const DISPLAY_ID = 'js-display';
 const DIVIDE_ID = 'js-divide';
 const EQUAL_ID = 'js-equal';
 const FRACTION_ID = 'js-fraction';
-const HISTORY_ID = 'js-history';
+const HISTORY_CONTAINER_CLASS_SELECTOR = '.calculator__history-container';
+const IS_VISIBLE_CLASS_SELECTOR = 'is-visible';
+const HISTORY_BUTTON_ID = 'js-history';
 const INVERT_ID = 'js-invert';
 const MEMORY_ADD_ID = 'js-M+';
 const MEMORY_CLEAR_ID = 'js-MC';
@@ -78,6 +80,11 @@ class Calculator {
     this.bindFunctionToButton(BACK_ID, () => this.back());
     this.bindFunctionToButton(INVERT_ID, () => this.inversion());
     this.bindFunctionToButton(COMMA_ID, () => this.addComma());
+    this.bindFunctionToButton(PERCENT_ID, () => this.percent());
+    this.bindFunctionToButton(SQUARE_ID, () => this.square());
+    this.bindFunctionToButton(POWER_ID, () => this.power());
+    this.bindFunctionToButton(FRACTION_ID, () => this.fraction());
+    this.bindFunctionToButton(HISTORY_BUTTON_ID, () => this.showHistyory());
   }
 
   bindFunctionToButton(id, callback) {
@@ -222,6 +229,30 @@ class Calculator {
     this.wasEqualClicked = true;
   }
 
+  power() {
+    this.callSpecialFunction(this.displayValue ** 2);
+  }
+
+  square() {
+    this.callSpecialFunction(Math.sqrt(this.displayValue));
+  }
+
+  percent() {
+    this.callSpecialFunction((this.previousValue * this.displayValue) / 100);
+  }
+
+  fraction() {
+    if (this.displayValue !== 0) {
+      this.callSpecialFunction(1 / this.displayValue);
+    }
+  }
+
+  callSpecialFunction(value) {
+    this.wasSpecialFunctionClicked = true;
+    this.wasEqualClicked = false;
+    this.changeDisplayValue(value);
+  }
+
   inversion() {
     this.changeDisplayValue(this.displayValue >= 0 ? -Math.abs(this.displayValue) : Math.abs(this.displayValue));
   }
@@ -270,6 +301,11 @@ class Calculator {
     this.displayValue = null;
     this.display.textContent = this.previousValue !== null ? newValue : this.display.textContent;
     this.previousValue = this.previousValue !== null ? newValue : this.display.textContent;
+  }
+
+  showHistyory() {
+    const historyContainer = document.querySelector(HISTORY_CONTAINER_CLASS_SELECTOR);
+    historyContainer.classList.toggle(IS_VISIBLE_CLASS_SELECTOR);
   }
 
   changeDisplayValue(value) {
