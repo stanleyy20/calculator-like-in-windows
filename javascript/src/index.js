@@ -1,5 +1,5 @@
 /* eslint-disable no-throw-literal */
-import './style.css';
+import './style.scss';
 
 const ADDITION_ID = 'js-addition';
 const BACK_ID = 'js-back';
@@ -10,6 +10,7 @@ const DISPLAY_ID = 'js-display';
 const DIVIDE_ID = 'js-divide';
 const EQUAL_ID = 'js-equal';
 const FRACTION_ID = 'js-fraction';
+const HISTORY_LIST_CLASS_SELECTOR = '.calculator__history-list';
 const HISTORY_CONTAINER_CLASS_SELECTOR = '.calculator__history-container';
 const IS_VISIBLE_CLASS_SELECTOR = 'is-visible';
 const HISTORY_BUTTON_ID = 'js-history';
@@ -37,10 +38,12 @@ class Calculator {
     this.repeatedValue = 0;
     this.wasEqualClicked = false;
     this.wasSpecialFunctionClicked = false;
+    this.history = null;
 
     this.bindToDisplay();
     this.bindToNumbers();
     this.bindToButtons();
+    this.bindToHistory();
   }
 
   bindToDisplay() {
@@ -54,6 +57,16 @@ class Calculator {
     this.display = display;
   }
 
+  bindToHistory() {
+    const history = document.querySelector(HISTORY_LIST_CLASS_SELECTOR);
+
+    if (!history) {
+      throw 'Nie znaleziono elementu dla historii';
+    }
+
+    this.history = history;
+  }
+
   bindToNumbers() {
     const numbers = document.querySelectorAll(NUMBER_CLASS_SELECTOR);
 
@@ -62,6 +75,7 @@ class Calculator {
     }
 
     numbers.forEach((number) => number.addEventListener('click', (e) => this.concatenateNumber(e)));
+    numbers.forEach((number) => number.addEventListener('click', (e) => this.concatenateNumberToHistory(e)));
   }
 
   bindToButtons() {
@@ -84,7 +98,7 @@ class Calculator {
     this.bindFunctionToButton(SQUARE_ID, () => this.square());
     this.bindFunctionToButton(POWER_ID, () => this.power());
     this.bindFunctionToButton(FRACTION_ID, () => this.fraction());
-    this.bindFunctionToButton(HISTORY_BUTTON_ID, () => this.showHistyory());
+    this.bindFunctionToButton(HISTORY_BUTTON_ID, () => this.showHistoryContainer());
   }
 
   bindFunctionToButton(id, callback) {
@@ -98,6 +112,10 @@ class Calculator {
     element.addEventListener('click', () => callback());
   }
 
+  concatenateNumberToHistory(e) {
+    this.historyPreviousValue = `${e.target.textContent} + ${e.target.textContent}`;
+  }
+
   concatenateNumber(e) {
     this.displayValue =
       this.displayValue === null || this.displayValue === 0 || this.wasSpecialFunctionClicked
@@ -105,7 +123,7 @@ class Calculator {
         : this.displayValue + e.target.textContent;
 
     if (this.wasEqualClicked) {
-      this.previousValue = 0;
+      this.previousValue = null;
       this.repeatedValue = 0;
       this.wasEqualClicked = false;
     }
@@ -161,6 +179,8 @@ class Calculator {
     const [displayValue, previousValue] = this.getDisplayAndPreviousValue(hasRepeatedValue);
     const newValue = displayValue + previousValue;
 
+    this.createHistoryElement(previousValue, `+`, displayValue, newValue);
+
     this.getRepeatedValue(hasRepeatedValue, newValue);
     this.setValuesAfterSettingNewValue(newValue);
   }
@@ -181,6 +201,9 @@ class Calculator {
 
       this.getRepeatedValue(hasRepeatedValue, newValue);
     }
+
+    this.createHistoryElement(previousValue, `-`, displayValue, newValue);
+
     this.setValuesAfterSettingNewValue(newValue);
   }
 
@@ -194,6 +217,8 @@ class Calculator {
 
     const [displayValue, previousValue] = this.getDisplayAndPreviousValue(hasRepeatedValue);
     const newValue = displayValue * previousValue;
+
+    this.createHistoryElement(previousValue, `*`, displayValue, newValue);
 
     this.getRepeatedValue(hasRepeatedValue, newValue);
     this.setValuesAfterSettingNewValue(newValue);
@@ -213,6 +238,8 @@ class Calculator {
       : previousValue === 0
       ? displayValue
       : previousValue / displayValue;
+
+    this.createHistoryElement(previousValue, `/`, displayValue, newValue);
 
     this.getRepeatedValue(hasRepeatedValue, newValue);
     this.setValuesAfterSettingNewValue(newValue);
@@ -303,7 +330,15 @@ class Calculator {
     this.previousValue = this.previousValue !== null ? newValue : this.display.textContent;
   }
 
-  showHistyory() {
+  createHistoryElement(firstValue, char, secondValue, result) {
+    const paragraph = document.createElement('p');
+    paragraph.classList.add('calculator__history-element');
+    paragraph.textContent = `${firstValue} ${char} ${secondValue} = ${result}`;
+
+    this.history.insertAdjacentElement('afterbegin', paragraph);
+  }
+
+  showHistoryContainer() {
     const historyContainer = document.querySelector(HISTORY_CONTAINER_CLASS_SELECTOR);
     historyContainer.classList.toggle(IS_VISIBLE_CLASS_SELECTOR);
   }
