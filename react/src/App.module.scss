@@ -1,0 +1,19 @@
+.calculator {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background-color: #ccc;
+
+  @media (min-width: 1025px) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vh;
+    height: 70vh;
+    border: solid 2px black;
+  }
+}

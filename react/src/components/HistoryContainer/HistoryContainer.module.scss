@@ -1,0 +1,24 @@
+.history-container {
+  display: block;
+  position: absolute;
+  bottom: -80%;
+  width: 100%;
+  height: 70%;
+  padding: 10px;
+  transition: 1s;
+  background-color: #bbb;
+  overflow: hidden;
+  letter-spacing: 0.1em;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+
+  &__history-list {
+    margin-top: 20px;
+  }
+}
+
+// .is-visible {
+//     bottom: 0;
+//   }

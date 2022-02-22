@@ -1,0 +1,11 @@
+.button-container {
+  display: block;
+  text-align: right;
+
+  &__history {
+    font-size: 36px;
+    padding-right: 4px;
+    padding-top: 4px;
+    cursor: pointer;
+  }
+}

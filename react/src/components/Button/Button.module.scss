@@ -1,0 +1,45 @@
+$hoverBreakpoint: 1025px;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(25% - 1px);
+  margin-bottom: 1px;
+  background-color: #ddd;
+
+  &:hover {
+    @media (min-width: $hoverBreakpoint) {
+      background-color: #bbb;
+      cursor: pointer;
+    }
+  }
+
+  &:active {
+    background-color: #bbb;
+  }
+
+  &--is-lighter {
+    background-color: #eee;
+  }
+
+  &--is-memory {
+    display: flex;
+    flex-basis: 30px;
+    align-items: center;
+    justify-content: center;
+    background-color: #ccc;
+    height: 30px;
+    margin-bottom: 2px;
+  }
+
+  &--is-equal {
+    background-color: #6d9dc3;
+
+    &:hover {
+      @media (min-width: $hoverBreakpoint) {
+        background-color: #4599dd;
+      }
+    }
+  }
+}
