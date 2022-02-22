@@ -5,10 +5,12 @@ import { default as HistoryButtonStyle } from './HistoryButton.module.scss';
 
 const style = bemCssModules(HistoryButtonStyle);
 
-const HistoryButton = () => {
+const HistoryButton = ({ showHistoryContainer }) => {
   return (
     <div className={style()}>
-      <span className={`material-icons ${style('history')}`}>history</span>
+      <span className={`material-icons ${style('history')}`} onClick={showHistoryContainer}>
+        history
+      </span>
     </div>
   );
 };

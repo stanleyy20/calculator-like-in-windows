@@ -6,13 +6,23 @@ import { default as ButonStyles } from './Button.module.scss';
 const style = bemCssModules(ButonStyles);
 
 const Button = (props) => {
+  const { onClick, content } = props;
+
   const modifires = {
     'is-equal': props.isEqual,
     'is-lighter': props.isLighter,
     'is-memory': props.isMemory,
   };
 
-  return <div className={style(modifires)}>{props.content}</div>;
+  const handleOnClick = (e) => {
+    onClick(e);
+  };
+
+  return (
+    <div className={style(modifires)} onClick={handleOnClick}>
+      {content}
+    </div>
+  );
 };
 
 export default Button;

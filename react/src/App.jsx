@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { default as bemCssModules } from 'bem-css-modules';
 import { default as AppStyles } from './App.module.scss';
 
@@ -7,6 +7,7 @@ import MemoryButons from './components/MemoryButtons/MemoryButtons';
 import MainPartButons from './components/MainPartButtons/MainPartButtons';
 import HistoryButton from './components/HistoryButton/HistoryButton';
 import HistoryContainer from './components/HistoryContainer/HistoryContainer';
+import StoreProvider from './stores/StoreProvider';
 
 bemCssModules.setSettings({
   modifierDelimiter: '--',
@@ -15,14 +16,21 @@ bemCssModules.setSettings({
 const style = bemCssModules(AppStyles);
 
 const App = () => {
+  const [isActive, setIsActive] = useState(false);
+  const showHistoryContainer = () => {
+    setIsActive(!isActive);
+  };
+
   return (
-    <div className={style()}>
-      <HistoryButton />
-      <Display />
-      <MemoryButons />
-      <MainPartButons />
-      <HistoryContainer />
-    </div>
+    <StoreProvider>
+      <div className={style()}>
+        <HistoryButton showHistoryContainer={showHistoryContainer} />
+        <Display />
+        <MemoryButons />
+        <MainPartButons />
+        <HistoryContainer isActive={isActive} />
+      </div>
+    </StoreProvider>
   );
 };
 
