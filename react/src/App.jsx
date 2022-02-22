@@ -16,19 +16,14 @@ bemCssModules.setSettings({
 const style = bemCssModules(AppStyles);
 
 const App = () => {
-  const [isActive, setIsActive] = useState(false);
-  const showHistoryContainer = () => {
-    setIsActive(!isActive);
-  };
-
   return (
     <StoreProvider>
       <div className={style()}>
-        <HistoryButton showHistoryContainer={showHistoryContainer} />
+        <HistoryButton />
         <Display />
         <MemoryButons />
         <MainPartButons />
-        <HistoryContainer isActive={isActive} />
+        <HistoryContainer />
       </div>
     </StoreProvider>
   );

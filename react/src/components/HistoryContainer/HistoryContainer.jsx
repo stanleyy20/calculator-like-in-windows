@@ -8,9 +8,9 @@ import { default as HistoryContainerStyle } from './HistoryContainer.module.scss
 
 const style = bemCssModules(HistoryContainerStyle);
 
-const HistoryContainer = ({ isActive }) => {
+const HistoryContainer = () => {
   const historyRef = useRef(null);
-  const { calculatorStore } = useContext(StoreContext);
+  const { calculatorStore, isActive } = useContext(StoreContext);
 
   useEffect(() => {
     if (historyRef.current && calculatorStore) {

@@ -240,11 +240,6 @@ export class CalculatorStore {
     this.history.insertAdjacentElement('afterbegin', paragraph);
   }
 
-  // showHistoryContainer() {
-  //   const historyContainer = document.querySelector(HISTORY_CONTAINER_CLASS_SELECTOR);
-  //   historyContainer.classList.toggle(IS_VISIBLE_CLASS_SELECTOR);
-  // }
-
   changeDisplayValue(value) {
     const isNoValue = value === null || value === '';
 
