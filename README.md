@@ -12,11 +12,8 @@ npm run build
 
 # Description
 
-A calculator modeled on the one in windows
+Weather app using https://openweathermap.org/ 
 
-# Technologies
-Project is created with:
+The application shows the weather for one day.
 
-CSS/SCSS
 
-Javascript
