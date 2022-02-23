@@ -18,4 +18,5 @@ A calculator modeled on the one in windows
 Project is created with:
 
 CSS/SCSS
+
 Javascript
