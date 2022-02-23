@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/calculator-like-in-windows/static/css/main.1680c897.css",
+    "main.js": "/calculator-like-in-windows/static/js/main.0868632d.js",
+    "index.html": "/calculator-like-in-windows/index.html",
+    "main.1680c897.css.map": "/calculator-like-in-windows/static/css/main.1680c897.css.map",
+    "main.0868632d.js.map": "/calculator-like-in-windows/static/js/main.0868632d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1680c897.css",
+    "static/js/main.0868632d.js"
+  ]
+}
